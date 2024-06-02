@@ -46,14 +46,14 @@ var BugDispatch = {
         bugWidth: 13,
         bugHeight: 14,
         num_frames: 5,
-        zoom: 10, // random zoom variation from 1 to 10 - 10 being full size.
+        zoom: 10,
         canFly: true,
         canDie: true,
         numDeathTypes: 3,
         monitorMouseMovement: false,
         eventDistanceToBug: 40,
         minTimeBetweenMultipy: 1000,
-        mouseOver: 'random' // can be 'fly', 'flyoff' (if the bug can fly), die', 'multiply', 'nothing' or 'random'
+        mouseOver: 'random'
     },
 
     initialize: function(options) {
@@ -105,7 +105,6 @@ var BugDispatch = {
 
 
         // check to see if it is a modern browser:
-
         if ('transform' in document.documentElement.style) {
             this.transform = this.transforms.w3c;
         } else {
@@ -122,8 +121,11 @@ var BugDispatch = {
             }
         }
 
-        // dont support transforms... quit
-        if (!this.transform) return;
+        // don't support transforms: quit
+        if (!this.transform) {
+            console.log('Transforms are not supported in this browser; quitting.');
+            return;
+        }
 
         // make bugs:
         this.bugs = [];
@@ -281,7 +283,7 @@ var BugDispatch = {
             bug.die();
         } else if (mode === 'multiply') {
             if (!this.multiplyDelay && this.bugs.length < this.options.maxBugs) {
-                // spawn another: 
+                // spawn another:
                 // create new bug:
                 var b = SpawnBug(),
                     options = JSON.parse(JSON.stringify(this.options)),
@@ -354,14 +356,34 @@ var SpiderController = function() {
     };
     this.options = mergeOptions(this.options, spiderOptions);
     this.initialize.apply(this, arguments);
-
 }
 SpiderController.prototype = BugDispatch;
 
-/***************/
-/**    Bug    **/
-/***************/
+var LadyBugController = function() {
+    var ladyBugOptions = {
+        imageSprite: 'ladybug-sprite.png',
+        bugWidth: 69,
+        bugHeight: 90,
+        num_frames: 7,
+        canFly: false,
+        canDie: true,
+        numDeathTypes: 2,
+        zoom: 6,
+        minDelay: 200,
+        maxDelay: 3000,
+        minSpeed: 7,
+        maxSpeed: 14,
+        minBugs: 2,
+        maxBugs: 4
+    };
+    this.options = mergeOptions(this.options, ladyBugOptions);
+    this.initialize.apply(this, arguments);
+}
+LadyBugController.prototype = BugDispatch;
 
+// ****************************************************************************
+// *                                    Bug                                   *
+// ****************************************************************************
 var Bug = {
 
     options: {
@@ -482,10 +504,13 @@ var Bug = {
 
         var delta = t - this._lastTimestamp;
 
-        if (delta < 40) return; // don't animate too frequently
+        if (delta < 40) {
+            // don't animate too frequently
+            return;
+        }
 
-        // sometimes if the browser doesnt have focus, or the delta in request animation 
-        // frame can be very large. We set a sensible max so that the bugs dont spaz out.
+        // sometimes if the browser doesnt have focus, or the delta in request animation
+        // frame can be very large. We set a sensible max so that the bugs don't spaz out.
 
         if (delta > 200) delta = 200;
 
@@ -555,9 +580,7 @@ var Bug = {
 
             this.bug = bug;
             this.setPos();
-
         }
-
     },
 
     setPos: function(top, left) {
@@ -576,7 +599,6 @@ var Bug = {
         // transform:
         var trans = "translate(" + parseInt(x) + "px," + parseInt(y) + "px)";
         if (deg) {
-            //console.log("translate("+(x)+"px, "+(y)+"px) rotate("+deg+"deg)");
             trans += " rotate(" + deg + "deg)";
         }
         trans += " scale(" + this.zoom + ")";
@@ -638,19 +660,17 @@ var Bug = {
         }
         if (Math.abs(diffx) + Math.abs(diffy) < 10) {
             // close enough:
-            this.bug.style.backgroundPosition = '0 0'; //+row+'px'));
+            this.bug.style.backgroundPosition = '0 0';
 
             this.stop();
             this.go();
-            //this.go.delay(100, this);
 
             return;
 
         }
 
-        // make it wiggle: disabled becuase its just too fast to see... better would be to make its path wiggly.
-        //angle = angle - (this.deg2rad(this.random(0,10)));
-        //console.log('angle: ',this.rad2deg(angle));
+        // make it wiggle: disabled becuase it's just too fast to see. Better would be to make its path wiggly.
+
 
         var dx = Math.cos(angle) * this.options.flySpeed,
             dy = Math.sin(angle) * this.options.flySpeed;
@@ -716,7 +736,7 @@ var Bug = {
         if (!this.bug) {
             this.makeBug();
         }
-        
+
         if(!this.bug) return;
 
         this.stop();
@@ -744,7 +764,7 @@ var Bug = {
             style.top = windowY + (2 * this.options.bugHeight);
             style.left = Math.random() * windowX;
         } else {
-            // left: 
+            // left:
             style.top = Math.random() * windowY;
             style.left = (-3 * this.options.bugWidth);
         }
@@ -767,7 +787,7 @@ var Bug = {
         if (!this.bug) {
             this.makeBug();
         }
-        
+
         if(!this.bug) return;
 
         this.stop();
@@ -795,7 +815,7 @@ var Bug = {
             style.top = windowY + (0.3 * this.options.bugHeight);
             style.left = Math.random() * windowX;
         } else {
-            // left: 
+            // left:
             style.top = Math.random() * windowY;
             style.left = (-1.3 * this.options.bugWidth);
         }
@@ -835,7 +855,7 @@ var Bug = {
             style.top = windowY + 200;
             style.left = Math.random() * windowX;
         } else {
-            // left: 
+            // left:
             style.top = Math.random() * windowY;
             style.left = -200;
         }
@@ -861,7 +881,7 @@ var Bug = {
             rotationRate = this.random(0, 20, true),
             startTime = Date.now(),
             that = this;
-        
+
         this.bug.classList.add('bug-dead');
 
         this.dropTimer = requestAnimFrame(function(t) {
@@ -883,8 +903,6 @@ var Bug = {
         if (newPos >= finalPos) {
             newPos = finalPos;
             clearTimeout(this.dropTimer);
-
-
 
             this.angle_deg = 0;
             this.angle_rad = this.deg2rad(this.angle_deg);
@@ -991,14 +1009,13 @@ var SpawnBug = function() {
     return newBug;
 };
 
-// debated about which pattern to use to instantiate each bug...
-// see http://jsperf.com/obj-vs-prototype-vs-other
+// Debated about which pattern to use to instantiate each bug.
+// See http://jsperf.com/obj-vs-prototype-vs-other
 
 
-
-/**
- * Helper methods:
- **/
+// ****************************************************************************
+// *                              Helper methods:                             *
+// ****************************************************************************
 
 var mergeOptions = function(obj1, obj2, clone) {
     if (typeof(clone) == 'undefined') {
