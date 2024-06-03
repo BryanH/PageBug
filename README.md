@@ -39,6 +39,12 @@ You can use SpiderController() as a shortcut for loading options and the sprite 
   new SpiderController({'minBugs':2, 'maxBugs':6});
 ```
 
+LadybugController() congtrols loading options and the sprite for the ladybugs.
+
+```js
+  new LadybugController({'minBugs':2, 'maxBugs':6});
+```
+
 See [example.html][5] for sample usage.
 
 BugController constructor can optionally take an object of options. To make this js more async friendly, you can adjust the default options at the top of bug.js, and then instantiate at the bottom of the file as above. This will allow one to wrap the entire script in a closure to prevent any global window name space overlaps.

@@ -3,8 +3,7 @@
 // @output_file_name bug-min.js
 // ==/ClosureCompiler==
 /**
- * @preserve Bug.js - https://github.com/Auz/Bug
- * Released under MIT-style license.
+ * @preserve Bug.js - https://github.com/BryanH/PageBug
  * Original Screen Bug http://screen-bug.googlecode.com/git/index.html
  */
 /**
@@ -12,8 +11,9 @@
  *
  * https://github.com/Auz/Bug
  *
- * license: MIT-style license.
+ * license: WTFPL
  * copyright: Copyright (c) 2016 Graham McNicoll
+ * copyright: © 2024 BryanH
  *
  *
  * Created for an aprils fool joke at Education.com 2013. I knew there was probably a script
@@ -359,7 +359,7 @@ var SpiderController = function() {
 }
 SpiderController.prototype = BugDispatch;
 
-var LadyBugController = function() {
+var LadybugController = function() {
     var ladyBugOptions = {
         imageSprite: 'ladybug-sprite.png',
         bugWidth: 69,
@@ -379,7 +379,7 @@ var LadyBugController = function() {
     this.options = mergeOptions(this.options, ladyBugOptions);
     this.initialize.apply(this, arguments);
 }
-LadyBugController.prototype = BugDispatch;
+LadybugController.prototype = BugDispatch;
 
 // ****************************************************************************
 // *                                    Bug                                   *
