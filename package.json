@@ -1,0 +1,18 @@
+{
+  "name": "PageBug",
+  "version": "1.0.0",
+  "description": "Add random bugs to the page, interact with mouse",
+  "main": "bug.js",
+  "repository": "git@github.com:BryanH/PageBug.git",
+  "author": "Bryan Hanks, PMP CSP-SM <bryan@master-developer.com>",
+  "license": "WTFPL",
+  "devDependencies": {
+    "@eslint/js": "^9.4.0",
+    "eslint": "9.x",
+    "globals": "^15.3.0"
+  },
+  "scripts": {
+    "min": "uglifyjs bug.js -mc --no-annotations -o bug-min.js"
+  },
+  "packageManager": "yarn@1.22.19+sha1.4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447"
+}
