@@ -12,7 +12,12 @@
     "globals": "^15.3.0"
   },
   "scripts": {
-    "min": "uglifyjs bug.js -mc --no-annotations -o bug-min.js"
+    "min": "uglifyjs bug.js -mc --no-annotations -o bug-min.js",
+    "lint": "concurrently \"yarn:lint:*(!fix|info)\" --names \"lint:\" --prefixColors auto",
+    "lint:fix": "concurrently \"yarn:lint:*:fix\" --names \"fix:\" --prefixColors auto && yarn format",
+    "lint:js": "eslint . --cache",
+    "lint:js:fix": "eslint . --fix",
+    "lint:js:info": "eslint --inspect-config"
   },
   "packageManager": "yarn@1.22.19+sha1.4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447"
 }
