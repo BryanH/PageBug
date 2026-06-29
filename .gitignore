@@ -1,3 +1,9 @@
 *.log
 node_modules/
 .eslintcache
+
+# Ignore minimized scripts - you can generate them with yarn
+*-min.js
+
+# Yarn
+/.yarn/install-state.gz
