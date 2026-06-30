@@ -1,0 +1,26 @@
+{
+  "name": "PageBug",
+  "version": "1.0.0",
+  "description": "Add random bugs to the page, interact with mouse",
+  "main": "bug.js",
+  "repository": "git@github.com:BryanH/PageBug.git",
+  "author": "Bryan Hanks, PMP CSP-SM <bryan@master-developer.com>",
+  "license": "WTFPL",
+  "devDependencies": {
+    "@eslint/js": "^9.4.0",
+    "eslint": "9.x",
+    "globals": "^15.3.0",
+    "grunt": "^1.6.2",
+    "uglify": "^0.1.5",
+    "uglifyjs": "^2.4.11"
+  },
+  "scripts": {
+    "min": "uglify bug.js -mc --no-annotations -o bug-min.js",
+    "lint": "concurrently \"yarn:lint:*(!fix|info)\" --names \"lint:\" --prefixColors auto",
+    "lint:fix": "concurrently \"yarn:lint:*:fix\" --names \"fix:\" --prefixColors auto && yarn format",
+    "lint:js": "eslint . --cache",
+    "lint:js:fix": "eslint . --fix",
+    "lint:js:info": "eslint --inspect-config"
+  },
+  "packageManager": "yarn@1.22.19+sha1.4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447"
+}
