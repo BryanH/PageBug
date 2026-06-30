@@ -4,7 +4,10 @@
   "description": "Add random bugs to the page, interact with mouse",
   "main": "bug.js",
   "repository": "git@github.com:BryanH/PageBug.git",
-  "author": "Bryan Hanks, PMP CSP-SM <bryan@master-developer.com>",
+  "author": {
+    "name":"Bryan Hanks, PMP CSP-SM",
+    "email":"bryan@master-developer.com"
+  },
   "license": "WTFPL",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
