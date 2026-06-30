@@ -7,9 +7,9 @@
   "author": "Bryan Hanks, PMP CSP-SM <bryan@master-developer.com>",
   "license": "WTFPL",
   "devDependencies": {
-    "@eslint/js": "^9.4.0",
-    "eslint": "9.x",
-    "globals": "^15.3.0",
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.6.0",
+    "globals": "^17.7.0",
     "grunt": "^1.6.2",
     "uglify": "^0.1.5",
     "uglifyjs": "^2.4.11"
