@@ -10,10 +10,12 @@
     "@eslint/js": "^9.4.0",
     "eslint": "9.x",
     "globals": "^15.3.0",
+    "grunt": "^1.6.2",
+    "uglify": "^0.1.5",
     "uglifyjs": "^2.4.11"
   },
   "scripts": {
-    "min": "uglifyjs bug.js -mc --no-annotations -o bug-min.js",
+    "min": "uglify bug.js -mc --no-annotations -o bug-min.js",
     "lint": "concurrently \"yarn:lint:*(!fix|info)\" --names \"lint:\" --prefixColors auto",
     "lint:fix": "concurrently \"yarn:lint:*:fix\" --names \"fix:\" --prefixColors auto && yarn format",
     "lint:js": "eslint . --cache",
