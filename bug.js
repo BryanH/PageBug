@@ -57,7 +57,7 @@ var BugDispatch = {
     },
 
     initialize: function(options) {
-
+        var i;
         this.options = mergeOptions(this.options, options);
 
         // sanity check:
@@ -110,8 +110,8 @@ var BugDispatch = {
         } else {
 
             // feature detection for the other transforms:
-            var vendors = ['Moz', 'webkit', 'O', 'ms', 'Khtml'],
-                i = 0;
+            var vendors = ['Moz', 'webkit', 'O', 'ms', 'Khtml']
+                ;
 
             for (i = 0; i < vendors.length; i++) {
                 if (vendors[i] + 'Transform' in document.documentElement.style) {
@@ -130,11 +130,11 @@ var BugDispatch = {
         // make bugs:
         this.bugs = [];
         var numBugs = (this.options.mouseOver === 'multiply') ? this.options.minBugs : this.random(this.options.minBugs, this.options.maxBugs, true),
-            i = 0,
+
             that = this;
 
         for (i = 0; i < numBugs; i++) {
-            var options = JSON.parse(JSON.stringify(this.options)),
+             options = JSON.parse(JSON.stringify(this.options)),
                 b = SpawnBug();
 
             options.wingsOpen = (this.options.canFly) ? ((Math.random() > 0.5) ? true : false) : true,
