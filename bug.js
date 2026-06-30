@@ -130,7 +130,7 @@ var BugDispatch = {
         // make bugs:
         this.bugs = [];
         var numBugs = (this.options.mouseOver === 'multiply') ? this.options.minBugs : this.random(this.options.minBugs, this.options.maxBugs, true),
-
+            b,
             that = this;
 
         for (i = 0; i < numBugs; i++) {
